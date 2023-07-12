@@ -1,21 +1,28 @@
 import { Injectable } from '@angular/core';
 import { Socket } from 'ngx-socket-io';
 import { Observable } from 'rxjs'
-import { Room } from '../models/room.model';
+import { Player, Room } from '../models/room.model';
+import { RoomStore } from '../stores/room.store';
 
 @Injectable({
   providedIn: 'root',
 })
 export class PokerService {
-  constructor(private socket: Socket, ) {
+  constructor(private socket: Socket, private roomStore: RoomStore) {
   }
-
   createRoom(roomName: string) {
     this.socket.emit('create-room', roomName);
   }
 
   joinRoom(roomName: string) {
     this.socket.emit('join-room', roomName);
+  }
+
+  joinGame(nickName: string) {
+    this.socket.emit('join-game', {
+      nickName: nickName,
+      code: this.roomStore.room.code
+    });
   }
 
   onCreatedRoom() {
@@ -34,9 +41,19 @@ export class PokerService {
     }) as Observable<{ room: Room, isSuccess: boolean }>
   }
 
-  onJoinVote(name: string) {
-    this.socket.emit('join-vote', {
-      name,
-    });
+  listenRoomMessage() {
+    return new Observable(observer => {
+      this.socket.on('poker-room', (data: any) => {
+        observer.next(data)
+      })
+    }) as Observable<any>;
+  }
+
+  onJoinedGame() {
+    return new Observable(observer => {
+      this.socket.on('joined-room', (data: {player: Player, room: Room}) => {
+        observer.next(data)
+      })
+    }) as Observable<{player: Player, room: Room}>;
   }
 }

@@ -1,12 +1,19 @@
 export interface Room {
   code: string,
   name: string,
-  users: User[]
+  players: Player[],
+  state: State | null
 }
 
-export interface User {
+export enum State {
+  Pending = 1,
+  Voting,
+  Done
+}
+
+export interface Player {
   id: string,
-  name: string,
+  nickName: string,
   score: number,
   isHost: boolean
 }

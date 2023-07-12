@@ -12,6 +12,10 @@ export class RoomStore {
     return this._room.asObservable();
   }
 
+  get room() {
+    return this._room.value;
+  }
+
   set room(value: Room) {
     this._room.next(value);
   }

@@ -1,0 +1,94 @@
+.container {
+    justify-content: center;
+    align-items: center;
+    width: 100vw;
+    height: 60vh;
+    .top,
+    .middle,
+    .bottom {
+        height: 20vh;
+    }
+    .top,
+    .bottom {
+        display: flex;
+        justify-content: center;
+    }
+    .top .card {
+        margin-bottom: 16px;
+    }
+    .bottom {
+        flex-wrap: wrap;
+        .card {
+            margin-top: 16px;
+            margin-bottom: auto;
+        }
+    }
+    .middle {
+        display: flex;
+        .left,
+        .right {
+            flex: 1;
+        }
+        .center {
+            flex: 2;
+            border-radius: 8px;
+            background: rgba($color: #0079FF, $alpha: 0.3);
+            border-radius: 16px;
+            h3 {
+                color: #0079FF;
+                font-weight: 600;
+            }
+        }
+    }
+}
+
+.table {
+    width: 12rem;
+    height: 8rem;
+    border-radius: 8px;
+    background-color: rgba($color: #bfb7fc, $alpha: 0.4);
+}
+
+.footer {
+    margin-top: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: end;
+    height: 40vh;
+    padding-bottom: 32px;
+}
+
+.deck-picker-container {
+    margin-top: 12px;
+    display: flex;
+    gap: 8px;
+    justify-content: center;
+    .deck-picker {
+        border: 2px solid #0079FF;
+        border-radius: 4px;
+        width: 30px;
+        height: 40px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: #0079FF;
+        font-weight: 500;
+        &.picked {
+            border-color: #00DFA2;
+            color: #00DFA2;
+        }
+        cursor: pointer;
+    }
+}
+
+.d-flex {
+    display: flex;
+}
+
+.content-center {
+    justify-content: center;
+}
+
+.items-center {
+    align-items: center;
+}

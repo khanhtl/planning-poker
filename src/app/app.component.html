@@ -1,14 +1,24 @@
 <div *ngIf="room$ | async as room">
-    <div *ngIf="room.code ;else createOrJoinRoom">
-        Enter name: <input type="text" #inputCreate>
-        <button (click)="createRoom(inputCreate)">Start vote</button>
-    </div>
+    <ng-container *ngIf="player$ | async as player">
+        <div *ngIf="!player?.id;else gameTable">
+            <div *ngIf="room.code ;else createOrJoinRoom">
+                Enter name: <input placeholder="enter your nick name!" type="text" #inputName>
+                <button (click)="joinGame(inputName)">Start vote</button>
+                <br> Room code: {{ room.code }}
+                <button>Share</button>
+            </div>
 
-    <ng-template #createOrJoinRoom>
-        <input type="text" #inputCreate>
-        <button (click)="createRoom(inputCreate)">Create room</button>
-        <div>OR</div>
-        <input type="text" #inputJoin>
-        <button (click)="joinRoom(inputJoin)">Join room</button>
-    </ng-template>
+            <ng-template #createOrJoinRoom>
+                <input placeholder="enter room name!" type="text" #inputCreate>
+                <button (click)="createRoom(inputCreate)">Create room</button>
+                <div>OR</div>
+                <input placeholder="enter room code!" type="text" #inputJoin>
+                <button (click)="joinRoom(inputJoin)">Join room</button>
+            </ng-template>
+        </div>
+        <ng-template #gameTable>
+            <app-game-table></app-game-table>
+        </ng-template>
+    </ng-container>
 </div>
+<!-- <app-game-table></app-game-table> -->

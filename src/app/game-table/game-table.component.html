@@ -1,0 +1,41 @@
+<div *ngIf="room$ | async as room">
+
+    <ng-container [ngSwitch]="room.state">
+        <div *ngSwitchCase="state.Pending">
+            <div class="container">
+                <div class="top d-flex">
+                    <app-card [players]="room.players?.slice(4,8) || []"></app-card>
+                </div>
+                <div class="middle">
+                    <div class="left">
+                        <app-card [players]="room.players?.slice(0,2) || []"></app-card>
+                    </div>
+                    <div class="center d-flex items-center content-center">
+                        <h3>Wait for player's votes...</h3>
+                    </div>
+                    <div class="right">
+                        <app-card [players]="room.players?.slice(2,4) || []"></app-card>
+                    </div>
+                </div>
+                <div class="bottom d-flex">
+                    <app-card [players]="room.players?.slice(8) || []"></app-card>
+                </div>
+                <div class="footer">
+                    <h3 class="d-flex items-center content-center">Choose your card 👇</h3>
+                    <div class="d-flex deck-picker-container">
+                        <div class="deck-picker" *ngFor="let i of [0.5, 1, 2, 3, 5, 8, 13, 21, '?']">
+                            {{i}}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div *ngSwitchCase="state.Voting">
+            <button>Flip cards</button>
+        </div>
+        <div *ngSwitchCase="state.Done">
+            <app-game-result></app-game-result>
+        </div>
+
+    </ng-container>
+</div>
