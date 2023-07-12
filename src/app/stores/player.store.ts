@@ -6,7 +6,7 @@ import { Player } from "../models/room.model";
   providedIn: 'root'
 })
 export class PlayerStore {
-  _player = new BehaviorSubject<Player>({} as Player);
+  private _player=new BehaviorSubject<Player>({} as Player);
 
   get player$() {
     return this._player.asObservable();
@@ -14,5 +14,8 @@ export class PlayerStore {
 
   set player(value: Player) {
     this._player.next(value);
+  }
+  get player() {
+    return this._player.value;
   }
 }

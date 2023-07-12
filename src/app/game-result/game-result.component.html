@@ -1,1 +1,6 @@
-<p>game-result works!</p>
+<div class="result">
+  <div class="avg">AVG: {{ result.avg }}</div>
+  <div *ngFor="let item of result.detail | keyvalue">
+    Score: {{ item.key }} - Count: {{ item.value.players.length }}
+  </div>
+</div>

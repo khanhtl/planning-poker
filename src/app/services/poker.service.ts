@@ -25,6 +25,16 @@ export class PokerService {
     });
   }
 
+  pickCard(data: any) {
+    this.socket.emit('pick-card', data);
+  }
+  flipCard(code: any) {
+    this.socket.emit('flip-card', code);
+  }
+  newVote(code: any) {
+    this.socket.emit('new-vote', code);
+  }
+
   onCreatedRoom() {
     return new Observable(observer => {
       this.socket.on('created-room', (room: Room) => {
@@ -51,9 +61,10 @@ export class PokerService {
 
   onJoinedGame() {
     return new Observable(observer => {
-      this.socket.on('joined-room', (data: {player: Player, room: Room}) => {
+      this.socket.on('joined-game', (data: { player: Player, room: Room }) => {
         observer.next(data)
       })
-    }) as Observable<{player: Player, room: Room}>;
+    }) as Observable<{ player: Player, room: Room }>;
   }
+
 }

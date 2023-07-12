@@ -1,5 +1,7 @@
+import { RoomStore } from './../stores/room.store';
 import { Component, Input, OnInit } from '@angular/core';
 import { Player, State } from '../models/room.model';
+import { PlayerStore } from '../stores/player.store';
 
 @Component({
   selector: 'app-card',
@@ -7,9 +9,12 @@ import { Player, State } from '../models/room.model';
   styleUrls: ['./card.component.scss']
 })
 export class CardComponent implements OnInit {
-  @Input() state!: State | null;
+
   @Input() players!: Player[];
-  constructor() { }
+  state=State;
+  player$=this.playerStore.player$;
+  room$=this.roomStore.room$;
+  constructor(private playerStore: PlayerStore, private roomStore: RoomStore) { }
 
   ngOnInit(): void {
   }

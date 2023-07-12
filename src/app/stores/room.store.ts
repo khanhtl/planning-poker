@@ -6,7 +6,7 @@ import { Room } from "../models/room.model";
   providedIn: 'root'
 })
 export class RoomStore {
-  _room = new BehaviorSubject<Room>({} as Room);
+  private _room=new BehaviorSubject<Room>({} as Room);
 
   get room$() {
     return this._room.asObservable();

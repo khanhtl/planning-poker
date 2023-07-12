@@ -10,15 +10,21 @@
     }
     .top,
     .bottom {
-        display: flex;
         justify-content: center;
+        display: flex;
+        app-card {
+          display: flex;
+          margin: 16px 0;
+          flex-wrap: wrap;
+          justify-content: center;
+        }
     }
     .top .card {
         margin-bottom: 16px;
     }
     .bottom {
-        flex-wrap: wrap;
-        .card {
+
+      .card {
             margin-top: 16px;
             margin-bottom: auto;
         }
@@ -38,6 +44,12 @@
                 color: #0079FF;
                 font-weight: 600;
             }
+        }
+        .room-code {
+          top: 8px;
+          left: 8px;
+          font-weight: bold;
+          font-size: 12px;
         }
     }
 }
@@ -76,6 +88,8 @@
         &.picked {
             border-color: #00DFA2;
             color: #00DFA2;
+            transform: translateY(-4px);
+            transition: 0.2s;
         }
         cursor: pointer;
     }
@@ -91,4 +105,11 @@
 
 .items-center {
     align-items: center;
+}
+
+.p-relative {
+  position: relative;
+}
+.p-absolute {
+  position: absolute;
 }
